@@ -1,0 +1,61 @@
+.main-container1{
+    width: 80%;
+    margin: 25px auto;
+    text-align: center;
+    background-color: grey;
+    border-radius: 20px;
+    padding: 30px;
+    color:white;
+}
+
+.main-container1 h1{
+    padding-bottom: 20px;
+}
+
+.form{
+    margin: 25px auto;
+    text-align: center;
+}
+
+.form input{
+    margin-bottom: 15px;
+}
+
+.form #bio{
+    padding: 10px;
+}
+
+.userInfo{
+    color: white;
+    text-decoration:none;
+}
+
+.logout-nav{
+    padding-left: 50px;
+}
+
+.profile-img{
+    display: block;
+    margin: 25px auto;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.user-info-container{
+    width: 80%;
+    margin: 25px auto;
+    text-align: center;
+    background-color: grey;
+    border-radius: 20px;
+    padding: 30px;
+    color:white;
+}
+
+.user-info-container p{
+    font-size: 25px;
+}
+
+.user-info-container h2{
+    color: black;
+}

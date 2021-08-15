@@ -22,6 +22,7 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql:42.2.23.jre7'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.3'
 	testImplementation 'org.springframework.security:spring-security-test:5.5.1'
+	implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
 }
 
 test {
