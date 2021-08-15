@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Sing up page</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">codefellowship</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/signup">Signup</a>
+                        </li>
+                    </ul>
+                </div>
+                <span th:text="${userInfo}" class="userInfo"></span>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <form th:action="@{/signup}" th:object="${user}" method="post" class="form">
+            <label for="username">User Name</label>
+            <input id="username" name="username" type="text" th:field="*{username}"/>
+            <br/>
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" th:field="*{password}"/>
+            <br/>
+            <label for="firstName">First Name</label>
+            <input id="firstName" name="firstName" type="text" th:field="*{firstName}"/>
+            <br/>
+            <label for="lastName">Last Name</label>
+            <input id="lastName" name="lastName" type="text" th:field="*{lastName}"/>
+            <br/>
+            <label for="dateOfBirth">Date Of Birth</label>
+            <input id="dateOfBirth" name="dateOfBirth" type="date" th:field="*{dateOfBirth}"/>
+            <br/>
+            <label for="bio">bio</label>
+            <input id="bio" name="bio" type="text" th:field="*{bio}"/>
+            <br/>
+
+            <button type="submit" class="btn btn-primary">Sign up</button>
+        </form>
+    </main>
+</body>
+</html>
