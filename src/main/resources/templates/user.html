@@ -8,32 +8,7 @@
     <title>User page</title>
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">codefellowship</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login" th:style="${hideWhenLogin}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/signup" th:style="${hideWhenLogin}">Signup</a>
-                    </li>
-                </ul>
-            </div>
-            <a class="nav-link" href="/perform_logout" th:style="${hideWhenLogout}">Logout</a>
-            <span th:text="${userInfo}" class="userInfo"></span>
-        </div>
-    </nav>
-</header>
+<div th:replace="header :: header"></div>
 <main>
     <img src="/img/profilepic.png" alt="profile picture" class="profile-img">
     <div class="user-info-container">
@@ -46,6 +21,24 @@
         <h2>bio</h2>
         <p th:text="${allUserInfo.bio}"></p>
     </div>
+
+    <form action="/myprofile" method="post">
+        <h1>Add a post</h1>
+        <input type="text" name="body" id="body"/> <br/>
+        <button type="submit">post</button>
+    </form>
+
+    <div>
+        <h1>User posts</h1>
+        <div class="card" style="width: 18rem;" th:each="post:${allUserInfo.posts}">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${'post' + post.id}"></h5>
+                <h6 class="card-subtitle mb-2 text-muted" th:text="${post.createdAt}"></h6>
+                <p class="card-text" th:text="${post.body}"></p>
+            </div>
+        </div>
+    </div>
+
 </main>
 </body>
 </html>
