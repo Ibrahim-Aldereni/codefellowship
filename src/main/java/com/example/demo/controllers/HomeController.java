@@ -16,15 +16,8 @@ public class HomeController {
     public String getHome(Principal p, Model model){
         try{
             model.addAttribute("userInfo",p.getName());
-            model.addAttribute("hideWhenLogin","display: none");
-            model.addAttribute("hideWhenLogout","display: auto");
-
-            // get user id
-            model.addAttribute("userId",applicationUserRepository.findByUsername(p.getName()).getId());
         }catch (NullPointerException e){
             model.addAttribute("userInfo","");
-            model.addAttribute("hideWhenLogin","display: auto");
-            model.addAttribute("hideWhenLogout","display: none");
         }
         return "home.html";
     }
