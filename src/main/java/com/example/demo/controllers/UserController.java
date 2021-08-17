@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Set;
 
 @Controller
 public class UserController {
@@ -41,5 +43,47 @@ public class UserController {
         Post post = new Post(body,applicationUserRepository.findByUsername(p.getName()));
         postRepository.save(post);
         return new RedirectView("/myprofile");
+    }
+
+    /////////////////////////////////// all users and feed and follow //////////////////////////////
+    @GetMapping("/allUsers")
+    public String getAllUsers(Principal p,Model model){
+        try{
+            // for the header
+            model.addAttribute("userInfo",p.getName());
+            // for the body
+            model.addAttribute("Allusers",applicationUserRepository.findAll());
+            // to hide the follow button
+            ApplicationUser me = applicationUserRepository.findByUsername(p.getName());
+            model.addAttribute("whoIFollow",me.getFollowers());
+        }catch (NullPointerException e){
+            model.addAttribute("userInfo","");
+        }
+        return "allUsers.html";
+    }
+
+    @PostMapping("/follow")
+    public RedirectView addFollow(Principal p,@RequestParam int id){
+        ApplicationUser me = applicationUserRepository.findByUsername(p.getName());
+        ApplicationUser toFollow = applicationUserRepository.findById(id).get();
+        me.getFollowers().add(toFollow);
+
+        applicationUserRepository.save(me);
+        return new RedirectView("/feed");
+    }
+
+    @GetMapping("/feed")
+    public String getFollowingInfo(Principal p, Model model){
+        try{
+            // for the header
+            model.addAttribute("userInfo",p.getName());
+            // for the body
+            ApplicationUser me = applicationUserRepository.findByUsername(p.getName());
+            Set<ApplicationUser> whoIFollow = me.getFollowers();
+            model.addAttribute("Allfollowing",whoIFollow);
+        }catch (NullPointerException e){
+            model.addAttribute("userInfo","");
+        }
+        return "feed.html";
     }
 }

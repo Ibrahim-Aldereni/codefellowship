@@ -4,8 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -22,6 +21,16 @@ public class ApplicationUser implements UserDetails {
     @OneToMany(mappedBy = "applicationUser")
     private List<Post> posts;
 
+    ///////////////////////////////////////////////new
+    @ManyToMany(cascade={CascadeType.ALL})
+    @JoinTable(name="FOLLOWER_FOLLOWING",
+            joinColumns={@JoinColumn(name="FOLLOWER_ID")},
+            inverseJoinColumns={@JoinColumn(name="FOLLOWING_ID")})
+    private Set<ApplicationUser> followers = new HashSet<>();
+
+    @ManyToMany(mappedBy="followers")
+    private Set<ApplicationUser> following = new HashSet<>();
+    ///////////////////////////////////////////////
     public ApplicationUser() {
     }
 
@@ -126,5 +135,21 @@ public class ApplicationUser implements UserDetails {
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
+    }
+
+    public Set<ApplicationUser> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Set<ApplicationUser> followers) {
+        this.followers = followers;
+    }
+
+    public Set<ApplicationUser> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(Set<ApplicationUser> following) {
+        this.following = following;
     }
 }
